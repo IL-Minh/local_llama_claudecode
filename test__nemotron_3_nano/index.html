@@ -1,0 +1,130 @@
+<!DOCTYPE html>                                                                                
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Love Me Webapp</title>
+      <style>
+          body, html {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: #f5f5f5;
+              font-family: Arial, sans-serif;
+          }
+
+          .container {
+              width: 100%;
+              max-width: 500px;
+              background: white;
+              border-radius: 15px;
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+              text-align: center;
+          }
+
+          h1 {
+              margin: 20px 0;
+              font-size: 2.5em;
+          }
+
+          p {
+              margin: 5px 0;
+              font-size: 1.2em;
+              color: #333;
+          }
+
+          button {
+              background-color: #4CAF50;
+              color: white;
+              border: none;
+              padding: 15px 30px;
+              font-size: 16px;
+              border-radius: 8px;
+              cursor: pointer;
+              margin: 10px;
+              position: relative;
+          }
+
+          #noBtn::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: white;
+              transition: transform 0.3s ease;
+              transform: scale(0);
+              opacity: 0;
+          }
+
+          button:hover:not(#noBtn) {
+              transform: scale(1.1);
+              box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+          }
+
+          .message {
+              margin-top: 20px;
+              font-size: 1.4em;
+              font-weight: bold;
+              max-width: 200px;
+              text-align: center;
+              color: white;
+              text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+              display: none;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <h1>Love Me?</h1>
+          <p>Do you love me?</p>
+
+          <button id="noBtn" title="Never click me">
+              Never
+          </button>
+          <button id="yesBtn">Yes</button>
+
+          <div class="message" id="message">I love u too babi</div>
+      </div>
+
+      <script>
+          // Move "No" button to random position on hover
+          const noBtn = document.getElementById('noBtn');
+          const message = document.getElementById('message');
+
+          noBtn.addEventListener('mouseover', function() {
+              clearInterval(cancelAnimationFrame);
+              const randomPos = {
+                  left: Math.random() * (window.innerWidth - 100) + 100,
+                  top: Math.random() * (window.innerHeight - 100) + 100
+              };
+              noBtn.style.position = 'relative';
+              noBtn.style.left = randomPos.left + 'px';
+              noBtn.style.top = randomPos.top + 'px';
+              noBtn.style.visibility = 'hidden'; // Optional: make it invisible
+
+              // Resume animation if needed
+          });
+
+          noBtn.addEventListener('mouseout', function() {
+              // Reset position when mouse leaves
+              noBtn.style.position = 'relative';
+              noBtn.style.left = 'auto';
+              noBtn.style.top = 'auto';
+              noBtn.style.visibility = 'visible';
+          });
+
+          // Show message when clicking "Yes"
+          document.getElementById('yesBtn').addEventListener('click', function() {
+              // Prevent default behavior
+              this.preventDefault();
+              message.style.display = 'block';
+              return false;
+          });
+      </script>
+  </body>
+  </html>
